@@ -1,0 +1,34 @@
+apply plugin: 'java'
+
+defaultTasks 'build'
+
+sourceCompatibility = 1.6
+
+repositories {
+    flatDir name: 'libs', dirs: 'lib'
+}
+
+repositories.libs {
+    addArtifactPattern(file('lib').absolutePath + '/[artifact]-[revision]/[artifact]-[revision].[ext]')
+}
+
+configurations {
+    examplesCompile { extendsFrom testCompile }
+//    examplesRuntime { extendsFrom examplesCompile, testRuntime }
+}
+
+sourceSets {
+    examples {
+        compileClasspath = sourceSets.main.classes + configurations.examplesCompile
+//        runtimeClasspath = classes + sourceSets.main.classes + configurations.examplesRuntime
+    }
+}
+
+dependencies {
+    compile     ':junit-dep:4.8.2'
+//    testCompile ':junit-dep:4.8.2', ':mockito-core:1.8.5', ':hamcrest-core:1.2'
+//    testRuntime ':objenesis:1.2'
+//    examplesCompile ':hamcrest-core:1.2'
+}
+
+build.dependsOn(compileExamplesJava)
