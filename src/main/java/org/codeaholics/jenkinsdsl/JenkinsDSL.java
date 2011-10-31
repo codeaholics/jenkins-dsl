@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.codeaholics.jenkinsdsl.domain.JobName;
+import org.codeaholics.jenkinsdsl.domain.JobSubjectList;
 import org.junit.Assert;
 
 public abstract class JenkinsDSL {
@@ -13,8 +13,20 @@ public abstract class JenkinsDSL {
 
     protected abstract String getServerUrl();
 
-    protected final <T extends Matchable> void every(final List<T> subjects, final Condition<T> condition) {
+    protected String getUserName() {
+        return null;
+    }
+
+    protected String getPassword() {
+        return null;
+    }
+
+    protected final <T extends Subject> void every(final SubjectList<T> subjects, final Condition<T> condition) {
         final List<ConditionNotMetException> exceptions = new LinkedList<ConditionNotMetException>();
+
+        if (subjects == null || !subjects.hasSubjects()) {
+            Assert.fail("No subjects found for testing");
+        }
 
         for (final T subject : subjects) {
             try {
@@ -29,11 +41,11 @@ public abstract class JenkinsDSL {
         }
     }
 
-    protected final List<JobName> jobName() {
-        return getServerConfiguration().allJobNames();
+    protected final JobSubjectList job() {
+        return new JobSubjectList(getServerConfiguration().allJobs());
     }
 
-    protected final <T extends Matchable> Condition<T> must(final Matcher<T> matcher) {
+    protected final <T extends Subject> Condition<T> must(final Matcher<T> matcher) {
         return new Condition<T>() {
             @Override
             public void ensure(final T subject) throws ConditionNotMetException {
@@ -44,7 +56,7 @@ public abstract class JenkinsDSL {
         };
     }
 
-    private <T extends Matchable> String describeFailure(final Matcher<T> matcher, final T subject) {
+    private <T extends Subject> String describeFailure(final Matcher<T> matcher, final T subject) {
         return String.format("%s should %s, but actually %s.", subject.describe(), matcher.should(), matcher.actually(subject));
     }
 
@@ -62,7 +74,7 @@ public abstract class JenkinsDSL {
         final String url = getServerUrl();
         ServerConfiguration configuration = serverConfigs.get(url);
         if (configuration == null) {
-            configuration = new ServerConfiguration(url);
+            configuration = new ServerConfiguration(url, getUserName(), getPassword());
             serverConfigs.put(url, configuration);
         }
         return configuration;

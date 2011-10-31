@@ -3,6 +3,7 @@ package org.codeaholics.jenkinsdsl.xml.parsers;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.codeaholics.jenkinsdsl.DocumentFetcher;
 import org.codeaholics.jenkinsdsl.domain.Job;
 import org.codeaholics.jenkinsdsl.domain.JobName;
 import org.codeaholics.jenkinsdsl.xml.IgnoreHandler;
@@ -11,7 +12,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXParseException;
 
 public class AllJobsHandler extends XmlHandler {
+    private final DocumentFetcher documentFetcher;
     private final List<Job> jobs = new LinkedList<Job>();
+
+    public AllJobsHandler(final DocumentFetcher documentFetcher) {
+        this.documentFetcher = documentFetcher;
+    }
 
     public List<Job> getJobs() {
         return jobs;
@@ -64,7 +70,7 @@ public class AllJobsHandler extends XmlHandler {
 
         @Override
         public void onEndElement(final String uri, final String tag) throws SAXParseException {
-            jobs.add(new Job(new JobName(nameHandler.text), urlHandler.text));
+            jobs.add(new Job(new JobName(nameHandler.text), urlHandler.text, documentFetcher));
         }
     }
 

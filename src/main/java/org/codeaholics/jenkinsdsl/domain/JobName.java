@@ -1,8 +1,8 @@
 package org.codeaholics.jenkinsdsl.domain;
 
-import org.codeaholics.jenkinsdsl.Matchable;
+import org.codeaholics.jenkinsdsl.Subject;
 
-public class JobName implements Matchable {
+public class JobName implements Subject {
     private final String name;
 
     public JobName(final String name) {
