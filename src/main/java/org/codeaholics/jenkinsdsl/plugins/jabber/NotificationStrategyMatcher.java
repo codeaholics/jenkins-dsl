@@ -18,11 +18,11 @@ public class NotificationStrategyMatcher implements Matcher<Job> {
 
     @Override
     public String should() {
-        return "have the notification strategy " + expectedStrategy;
+        return "have the notification strategy " + expectedStrategy.getText();
     }
 
     @Override
     public String actually(final Job item) {
-        return "had the notification strategy " + notificationStrategyAttribute.get(item);
+        return "has the notification strategy " + notificationStrategyAttribute.get(item).getText();
     }
 }
