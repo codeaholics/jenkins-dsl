@@ -1,5 +1,6 @@
 /bin/
 /build/
 /.gradle/
+/out/
 *.bak
 *.iws
