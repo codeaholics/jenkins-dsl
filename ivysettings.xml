@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ivysettings>
+    <settings defaultResolver="roundup"/>
+  
+    <resolvers>
+        <packager name="roundup" buildRoot="${ivy.home}/packager/build" resourceCache="${ivy.home}/packager/cache">
+            <ivy pattern="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/[organisation]/[module]/[revision]/ivy.xml"/>
+            <artifact pattern="http://ivyroundup.googlecode.com/svn/trunk/repo/modules/[organisation]/[module]/[revision]/packager.xml"/>
+        </packager>
+    </resolvers>
+</ivysettings>
