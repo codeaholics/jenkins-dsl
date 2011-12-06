@@ -2,8 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/junit-dep-4.8.2/junit-dep-4.8.2.jar" sourcepath="lib/junit-dep-4.8.2/junit-4.8.2-src.jar"/>
-	<classpathentry kind="lib" path="lib/hamcrest-core-1.2/hamcrest-core-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/org.junit/junit-4.9/jar/junit-dep.jar" sourcepath="lib/org.junit/junit-4.9/source/junit.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
