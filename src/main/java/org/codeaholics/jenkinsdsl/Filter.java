@@ -5,6 +5,7 @@ public interface Filter<T> {
 
     /**
      * Describe why an item was excluded by this filter. Complete the blank in "Widget X was excluded because ____."
+     * Use present tense.
      */
     public String describeExcluded(T item);
 }
