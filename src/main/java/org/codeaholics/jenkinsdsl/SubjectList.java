@@ -21,7 +21,7 @@ public class SubjectList<T extends Subject> implements Iterable<T> {
             if (filter.include(attribute.get(subject))) {
                 results.add(subject);
             } else {
-//                System.out.println(String.format("%s was excluded because %s" + filter.describeExcluded(subject)));
+                System.out.println(String.format("%s was excluded because %s", subject.describe(), filter.describeExcluded(attribute.get(subject))));
             }
         }
         return new SubjectList<T>(results);
